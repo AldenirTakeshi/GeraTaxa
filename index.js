@@ -5,20 +5,26 @@ const distanciaKm = rangeInput.value;
 
 rangeInput.addEventListener("input", () => {
   rangeValue.innerText = rangeInput.value + "km";
+  converterKmEmReal(rangeInput.value);
+  valorTaxa.innerText = converterKmEmReal(rangeInput.value);
 });
 
-function converterKmEmReais(distanciaKm) {
-  let preco = 0;
-  if (distanciaKm >= 1 && distanciaKm <= 2) {
-    preco = 5;
-  } else if (distanciaKm >= 3 && distanciaKm <= 5) {
-    preco = 10;
-  } else if (distanciaKm >= 5 && distanciaKm <= 7) {
-    preco = 10;
+function converterKmEmReal(km) {
+  let valor = 0;
+
+  if (km >= 1 && km <= 2) {
+    valor = 6;
+  } else if (km >= 3 && km <= 5) {
+    valor = 8;
+  } else if (km >= 5 && km <= 7) {
+    valor = 10;
+  } else if (km > 7 && km <= 20) {
+    valor = 12;
+  } else if (km > 20) {
+    return "Não é possível converter mais de 20km.";
   } else {
-    // Caso a distância não esteja em nenhuma das faixas de preço definidas
-    return "Distância não suportada";
+    return "Por favor, insira um valor válido.";
   }
-  return `A distância de ${distanciaKm} km custa R$ ${preco}`;
+
+  return `O valor para ${km} km é R$${valor}.`;
 }
-console.log(converterKmEmReais(distanciaKm));
